@@ -18,21 +18,21 @@ const About: React.FC = () => {
             />
           </div>
         </div>
-        <div className="md:col-span-5 md:col-start-8 flex flex-col justify-center space-y-8 mt-12 md:mt-0">
+        <div className="md:col-span-5 md:col-start-8 flex flex-col justify-center space-y-6 mt-12 md:mt-0">
           <span className="font-label-caps text-label-caps text-tertiary tracking-widest uppercase">
-            Our Heritage
+            Meet the Florist
           </span>
           <h2 className="font-headline-lg md:text-headline-lg text-[28px] text-primary">
             Rooted in Nature, Cultivated with Elegance.
           </h2>
           <p className="font-body-lg md:text-body-lg text-[15px] text-on-surface-variant leading-relaxed">
-            At Florist SSY, we believe that floral design is a form of fine art. Our botanical heritage
-            inspires a passionate commitment to nature&apos;s unrefined beauty. We craft unique floral narratives
-            that speak to the heart of your most cherished celebrations.
+            Hello, I am Soyoun Kim. I would like to briefly introduce myself and welcome you to my space! I never really planned on making this a career. I started doing this simply because I loved flowers, their energy, the colors, and how they just make people happy. Fast forward through a lot of thorns and early mornings, and I&apos;ve been doing this for 18 years now! Working with flowers has always brought me joy, and that passion eventually led me to become a florist, creating floral designs for weddings and other meaningful celebrations.
           </p>
-          <p className="font-body-md md:text-body-md text-[14px] text-on-surface-variant leading-relaxed opacity-80">
-            Every arrangement is thoughtfully curated, embracing asymmetry and organic textures to deliver a
-            tactile, premium experience that elevates any environment into a space of quiet prestige.
+          <p className="font-body-md md:text-body-md text-[14px] text-on-surface-variant leading-relaxed opacity-90">
+            I believe in the natural beauty of flowers. My style is elegant, timeless, and thoughtfully designed to reflect each client&apos;s unique story and special moment. Every arrangement is created with care, attention to detail, and a genuine love for what I do.
+          </p>
+          <p className="font-body-md md:text-body-md text-[14px] text-on-surface-variant leading-relaxed opacity-80 italic">
+            I&apos;ve spent 18 years doing what I love, and I&apos;d love to bring that experience to your next special day.
           </p>
         </div>
       </div>

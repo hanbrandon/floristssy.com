@@ -7,13 +7,38 @@ const Contact: React.FC = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setName('');
-    setEmail('');
-    setMessage('');
+    setIsLoading(true);
+    setErrorMsg('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send message. Please try again.');
+      }
+
+      setSubmitted(true);
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (err: any) {
+      setErrorMsg(err.message || 'An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -57,6 +82,11 @@ const Contact: React.FC = () => {
               </div>
             ) : (
               <form className="space-y-8" onSubmit={handleSubmit}>
+                {errorMsg && (
+                  <div className="p-4 bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 rounded text-[13px] border border-red-100 dark:border-red-900/30" role="alert">
+                    {errorMsg}
+                  </div>
+                )}
                 <div className="relative pt-6">
                   <input
                     className="peer w-full bg-transparent border-0 border-b border-outline-variant/50 focus:border-tertiary focus:ring-0 px-0 py-2 font-body-md text-primary transition-colors placeholder-transparent focus-visible:outline-none"
@@ -67,6 +97,7 @@ const Contact: React.FC = () => {
                     aria-required="true"
                     autoComplete="name"
                     value={name}
+                    disabled={isLoading}
                     onChange={(e) => setName(e.target.value)}
                   />
                   <label
@@ -86,6 +117,7 @@ const Contact: React.FC = () => {
                     aria-required="true"
                     autoComplete="email"
                     value={email}
+                    disabled={isLoading}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <label
@@ -104,6 +136,7 @@ const Contact: React.FC = () => {
                     required
                     aria-required="true"
                     value={message}
+                    disabled={isLoading}
                     onChange={(e) => setMessage(e.target.value)}
                   />
                   <label
@@ -114,10 +147,11 @@ const Contact: React.FC = () => {
                   </label>
                 </div>
                 <button
-                  className="w-full bg-primary-container text-on-primary font-label-caps text-label-caps py-4 px-8 rounded hover:bg-primary transition-colors mt-8 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-container"
+                  className="w-full bg-primary-container text-on-primary font-label-caps text-label-caps py-4 px-8 rounded hover:bg-primary transition-colors mt-8 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-container disabled:opacity-50"
                   type="submit"
+                  disabled={isLoading}
                 >
-                  Inquire
+                  {isLoading ? 'Sending...' : 'Inquire'}
                 </button>
               </form>
             )}

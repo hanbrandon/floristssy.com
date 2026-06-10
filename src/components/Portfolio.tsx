@@ -5,42 +5,154 @@ import Image from 'next/image';
 
 interface PortfolioItem {
   src: string;
-  title: string;
-  description: string;
   alt: string;
 }
 
 const portfolioItems: PortfolioItem[] = [
   {
-    src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB3dkEwFdH59Bys0SRqJbqigHXWnzlspqZ_0JxMAE7xLV0A7wpzMvXsnbPpk7c_XIKi_n8rnjSY3C8ZQFpjcRdL117w_SWJxzbZGHWHnAZWjrnETtiKF4-WIBsIgYQNBx5GNO_teypLnfX3r4GMPyDk3pXgQkHGutXUdtwmOSj4L0Qwu0fgYaCx7RIoYR8dgU4FX9EZvrZmUh7jJmicpY7pU8OmkjeyH59mRpjT2SDG2aTNMQu35mMg56seT-X8f0DkjrihVVAt2gw',
-    title: 'Editorial Romance',
-    description: 'Bespoke Bridal Bouquet',
-    alt: 'A breathtaking, close-up editorial shot of a lush, bespoke wedding bouquet resting on a piece of raw, textured linen in a minimalist setting. The arrangement features a sophisticated palette of deep burgundy, soft cream, and muted sage green organic foliage. The lighting is soft and moody, highlighting the delicate folds of the petals and the artisanal, slow-luxury aesthetic typical of a premium floristry brand.',
+    src: "/portfolio/portfolio_01.jpg",
+    alt: "Bespoke floral design work 01 at floristssy.com."
   },
   {
-    src: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB_SkkdvhNXwGoa-C3Srx_WbjylXOvbk04hVWwYosGGvYsK9DGYMY-snGGUhz3l8fyLlK3RmB-N2TSGevC550MVOcFcPXRLpp2yNWFzWh8TyjyOm7QvOByVuJqi2zn1tuDr9WYiVpb1O6mpag77Grkc33PqIDtC_Ax-XRY06nxQGVVitelaVS2yMchY7ro2u4PPKdNX4PwWrJ2OceLH8fI-lIHdSyRcBMhqMtwOCQjQqDLm19Ft0HemN3Oak87X4a6JseGMO-8KQKI',
-    title: 'Architectural Grace',
-    description: 'Tablescape Installation',
-    alt: 'A striking, asymmetrical floral centerpiece displayed on a clean, modern off-white stone table. The arrangement utilizes a minimalist-organic style, featuring sculptural branches, delicate white blossoms, and deep emerald green accents. The environment is bathed in bright, natural light, creating a serene, high-end gallery feel that perfectly captures the sophisticated artistry of a luxury bespoke floral design.',
+    src: "/portfolio/portfolio_02.jpg",
+    alt: "Bespoke floral design work 02 at floristssy.com."
   },
   {
-    src: '/portfolio_wildwood.png',
-    title: 'Wildwood Harmony',
-    description: 'Vintage Organic Centerpiece',
-    alt: 'A beautiful, detailed editorial photo of a vintage organic floral centerpiece, featuring wildwood branches, climbing vines, delicate forest wildflowers, and soft cream roses.',
+    src: "/portfolio/portfolio_03.jpg",
+    alt: "Bespoke floral design work 03 at floristssy.com."
   },
   {
-    src: '/portfolio_ethereal.png',
-    title: 'Ethereal Whispers',
-    description: 'Minimalist Wedding Arch',
-    alt: 'A high-end editorial photo of a minimalist ethereal wedding arch, decorated with cascading white orchid blossoms, sheer cream chiffon fabric, and delicate dried twigs.',
+    src: "/portfolio/portfolio_04.jpg",
+    alt: "Bespoke floral design work 04 at floristssy.com."
   },
   {
-    src: '/portfolio_autumn.png',
-    title: 'Autumnal Radiance',
-    description: 'Dining Table Florals',
-    alt: 'An elegant editorial photo of a warm autumnal floral dining table styling, with terracotta and copper vessels holding wild pampas grass, warm orange dahlias, and burgundy eucalyptus leaves.',
+    src: "/portfolio/portfolio_05.jpg",
+    alt: "Bespoke floral design work 05 at floristssy.com."
   },
+  {
+    src: "/portfolio/portfolio_06.jpg",
+    alt: "Bespoke floral design work 06 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_07.jpg",
+    alt: "Bespoke floral design work 07 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_08.jpg",
+    alt: "Bespoke floral design work 08 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_09.jpg",
+    alt: "Bespoke floral design work 09 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_10.jpg",
+    alt: "Bespoke floral design work 10 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_11.jpg",
+    alt: "Bespoke floral design work 11 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_12.jpg",
+    alt: "Bespoke floral design work 12 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_13.jpg",
+    alt: "Bespoke floral design work 13 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_14.jpg",
+    alt: "Bespoke floral design work 14 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_15.jpg",
+    alt: "Bespoke floral design work 15 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_16.jpg",
+    alt: "Bespoke floral design work 16 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_17.jpg",
+    alt: "Bespoke floral design work 17 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_18.jpg",
+    alt: "Bespoke floral design work 18 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_19.jpg",
+    alt: "Bespoke floral design work 19 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_20.jpg",
+    alt: "Bespoke floral design work 20 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_21.jpg",
+    alt: "Bespoke floral design work 21 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_22.jpg",
+    alt: "Bespoke floral design work 22 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_23.jpg",
+    alt: "Bespoke floral design work 23 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_24.jpg",
+    alt: "Bespoke floral design work 24 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_25.jpg",
+    alt: "Bespoke floral design work 25 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_26.jpg",
+    alt: "Bespoke floral design work 26 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_29.png",
+    alt: "Bespoke floral design work 29 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_30.jpg",
+    alt: "Bespoke floral design work 30 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_31.jpg",
+    alt: "Bespoke floral design work 31 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_32.jpg",
+    alt: "Bespoke floral design work 32 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_33.jpg",
+    alt: "Bespoke floral design work 33 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_34.png",
+    alt: "Bespoke floral design work 34 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_35.png",
+    alt: "Bespoke floral design work 35 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_36.jpg",
+    alt: "Bespoke floral design work 36 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_37.jpg",
+    alt: "Bespoke floral design work 37 at floristssy.com."
+  },
+  {
+    src: "/portfolio/portfolio_38.jpg",
+    alt: "Bespoke floral design work 38 at floristssy.com."
+  }
 ];
 
 const Portfolio: React.FC = () => {
@@ -159,7 +271,7 @@ const Portfolio: React.FC = () => {
               key={index}
               className="w-[75vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] xl:w-[18vw] flex-shrink-0 snap-start snap-always group relative overflow-hidden rounded cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tertiary"
               tabIndex={0}
-              aria-label={`${item.title} - ${item.description}. Click to zoom in.`}
+              aria-label={`${item.alt}. Click to zoom in.`}
               onClick={() => {
                 if (!isDragging.current) {
                   setSelectedItem(item);
@@ -180,16 +292,6 @@ const Portfolio: React.FC = () => {
                   sizes="(max-width: 640px) 75vw, (max-width: 768px) 45vw, (max-width: 1024px) 30vw, (max-width: 1280px) 22vw, 18vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105 group-focus-within:scale-105"
                 />
-              </div>
-              <div
-                className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-primary-container/90 to-transparent p-8 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 transition-all duration-300 pointer-events-none"
-              >
-                <h3 className="font-headline-md text-headline-md text-on-primary text-[20px] leading-tight">
-                  {item.title}
-                </h3>
-                <p className="font-body-md text-on-primary/80 mt-2 text-[13px]">
-                  {item.description}
-                </p>
               </div>
             </div>
           ))}
@@ -251,7 +353,7 @@ const Portfolio: React.FC = () => {
           className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm transition-opacity duration-300"
           role="dialog"
           aria-modal="true"
-          aria-labelledby="modal-title"
+          aria-label="Expanded portfolio image"
           onClick={() => setSelectedItem(null)}
         >
           <button
@@ -278,18 +380,6 @@ const Portfolio: React.FC = () => {
                 sizes="(max-width: 1024px) 90vw, 80vw"
                 className="object-contain bg-neutral-900"
               />
-            </div>
-            
-            <div className="text-center mt-6 text-white pointer-events-auto max-w-2xl px-4">
-              <h3 id="modal-title" className="font-headline-md text-headline-md text-white text-[28px] leading-tight">
-                {selectedItem.title}
-              </h3>
-              <p className="font-body-md text-white/80 mt-2 text-[16px]">
-                {selectedItem.description}
-              </p>
-              <p className="font-body-md text-white/60 mt-4 text-[13px] leading-relaxed max-w-xl mx-auto italic">
-                {selectedItem.alt}
-              </p>
             </div>
           </div>
         </div>
