@@ -3,6 +3,20 @@
 import React, { useState } from 'react';
 
 const Contact: React.FC = () => {
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'floristssy@gmail.com';
+  const contactPhoneRaw = process.env.NEXT_PUBLIC_CONTACT_PHONE || '9179928888';
+
+  const formatPhoneNumber = (phone: string) => {
+    const cleaned = ('' + phone).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return `(${match[1]}) ${match[2]}-${match[3]}`;
+    }
+    return phone;
+  };
+
+  const contactPhone = formatPhoneNumber(contactPhoneRaw);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -59,14 +73,20 @@ const Contact: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-label-caps text-label-caps text-primary mb-2">Contact</h3>
-                <p className="font-body-md text-on-surface-variant">
+                <div className="flex flex-col space-y-1 font-body-md text-on-surface-variant">
                   <a
-                    href="mailto:hello@floristssy.com"
+                    href={`mailto:${contactEmail}`}
                     className="hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-tertiary"
                   >
-                    hello@floristssy.com
+                    {contactEmail}
                   </a>
-                </p>
+                  <a
+                    href={`tel:${contactPhoneRaw}`}
+                    className="hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-tertiary text-[14px]"
+                  >
+                    {contactPhone}
+                  </a>
+                </div>
               </div>
             </address>
           </div>

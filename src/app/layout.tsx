@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Creating romantic & refined floral moments for weddings and destinations. Buford, Atlanta, Georgia. Now booking 2026/2027 weddings.",
   metadataBase: new URL("https://floristssy.com"),
   alternates: {
-    canonical: "/",
+    canonical: "https://floristssy.com",
   },
   openGraph: {
     title: "Florist SSY - Atlanta Wedding Florist",

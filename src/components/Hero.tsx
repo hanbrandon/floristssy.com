@@ -1,7 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onInquireClick?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onInquireClick }) => {
   return (
     <section className="relative min-h-[921px] flex items-center justify-center pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop">
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -32,7 +36,7 @@ const Hero: React.FC = () => {
             Now booking 2026/2027 weddings &bull; Buford &bull; Atlanta &bull; Destination
           </span>
         </p>
-        <div className="overflow-hidden py-1 inline-block">
+        <div className="overflow-hidden py-1 flex flex-col sm:flex-row items-center justify-center gap-8 mt-4">
           <a
             className="inline-flex items-center space-x-2 text-white font-label-caps text-label-caps group border-b border-white/30 pb-1 hover:border-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white transition-all reveal-text"
             href="#portfolio"
@@ -46,6 +50,19 @@ const Hero: React.FC = () => {
               arrow_right_alt
             </span>
           </a>
+          <button
+            onClick={onInquireClick}
+            className="inline-flex items-center space-x-2 text-white font-label-caps text-label-caps group border-b border-white/30 pb-1 hover:border-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white transition-all reveal-text cursor-pointer"
+            style={{ animationDelay: '500ms', animationFillMode: 'both' }}
+          >
+            <span>Inquire for Florals</span>
+            <span
+              className="material-symbols-outlined group-hover:translate-y-0.5 transition-transform"
+              aria-hidden="true"
+            >
+              mail
+            </span>
+          </button>
         </div>
       </div>
     </section>

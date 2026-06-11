@@ -1,10 +1,36 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onInquireClick?: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onInquireClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHome = pathname === '/';
+  
+  // 홈이 아닌 다른 서브페이지(예: /about)에서는 스크롤 위치와 상관없이 헤더 배경색과 텍스트 대비를 강제 적용
+  const forceScrolled = isScrolled || !isHome;
+
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'floristssy@gmail.com';
+  const contactPhoneRaw = process.env.NEXT_PUBLIC_CONTACT_PHONE || '9179928888';
+
+  const formatPhoneNumber = (phone: string) => {
+    const cleaned = ('' + phone).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return `(${match[1]}) ${match[2]}-${match[3]}`;
+    }
+    return phone;
+  };
+
+  const contactPhone = formatPhoneNumber(contactPhoneRaw);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,13 +78,31 @@ const Header: React.FC = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    if (isHome) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      router.push('/');
+    }
+  };
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (isHome) {
+      e.preventDefault();
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 w-full border-b transition-all duration-300 ${
           isMenuOpen
             ? 'bg-transparent border-transparent backdrop-blur-none shadow-none'
-            : isScrolled
+            : forceScrolled
               ? 'bg-background/80 dark:bg-background/80 backdrop-blur-md border-outline-variant/10 shadow-sm'
               : 'bg-transparent backdrop-blur-none border-transparent'
         }`}
@@ -68,9 +112,9 @@ const Header: React.FC = () => {
           isScrolled ? 'py-3.5' : 'py-6'
         }`}>
           <div 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={handleLogoClick}
             className={`font-headline-md text-[20px] md:text-headline-md transition-all duration-300 whitespace-nowrap cursor-pointer hover:opacity-75 ${
-              (isMenuOpen || !isScrolled) ? 'text-white' : 'text-primary dark:text-primary-fixed'
+              (isMenuOpen || !forceScrolled) ? 'text-white' : 'text-primary dark:text-primary-fixed'
             }`}
           >
             Florist SSY
@@ -78,71 +122,81 @@ const Header: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-10 font-label-caps text-[11px] tracking-[0.15em] items-center">
-            <a
+            <Link
               className={`relative pb-1 transition-colors duration-300 cursor-pointer active:opacity-70 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
-                isScrolled 
+                forceScrolled 
                   ? 'text-on-surface-variant hover:text-primary focus-visible:outline-primary' 
                   : 'text-white/80 hover:text-white focus-visible:outline-white'
               }`}
-              href="#about"
+              href="/about"
             >
               ABOUT US
               <span className={`absolute bottom-0 left-0 w-full h-[1px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${
-                isScrolled ? 'bg-primary' : 'bg-white'
+                forceScrolled ? 'bg-primary' : 'bg-white'
               }`} />
-            </a>
-            <a
+            </Link>
+            <Link
               className={`relative pb-1 transition-colors duration-300 cursor-pointer active:opacity-70 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
-                isScrolled 
+                forceScrolled 
                   ? 'text-on-surface-variant hover:text-primary focus-visible:outline-primary' 
                   : 'text-white/80 hover:text-white focus-visible:outline-white'
               }`}
-              href="#portfolio"
+              href={isHome ? "#portfolio" : "/#portfolio"}
+              onClick={(e) => handleNavClick(e, 'portfolio')}
             >
               PORTFOLIO
               <span className={`absolute bottom-0 left-0 w-full h-[1px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${
-                isScrolled ? 'bg-primary' : 'bg-white'
+                forceScrolled ? 'bg-primary' : 'bg-white'
               }`} />
-            </a>
-            <a
+            </Link>
+            <Link
               className={`relative pb-1 transition-colors duration-300 cursor-pointer active:opacity-70 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
-                isScrolled 
+                forceScrolled 
                   ? 'text-on-surface-variant hover:text-primary focus-visible:outline-primary' 
                   : 'text-white/80 hover:text-white focus-visible:outline-white'
               }`}
-              href="#contact"
+              href={isHome ? "#contact" : "/#contact"}
+              onClick={(e) => handleNavClick(e, 'contact')}
             >
               CONTACT US
               <span className={`absolute bottom-0 left-0 w-full h-[1px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${
-                isScrolled ? 'bg-primary' : 'bg-white'
+                forceScrolled ? 'bg-primary' : 'bg-white'
               }`} />
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Button */}
           <div className="hidden md:block">
-            <button
-              className={`border bg-transparent font-label-caps text-[11px] tracking-[0.15em] py-2.5 px-7 rounded-sm transition-all duration-300 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
-                isScrolled
-                  ? 'border-primary/20 hover:border-primary text-primary hover:bg-primary hover:text-white focus-visible:outline-primary'
-                  : 'border-white/30 hover:border-white text-white hover:bg-white hover:text-primary focus-visible:outline-white'
-              }`}
-              type="button"
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              INQUIRE
-            </button>
+            {isHome ? (
+              <button
+                className={`border bg-transparent font-label-caps text-[11px] tracking-[0.15em] py-2.5 px-7 rounded-sm transition-all duration-300 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
+                  forceScrolled
+                    ? 'border-primary/20 hover:border-primary text-primary hover:bg-primary hover:text-white focus-visible:outline-primary'
+                    : 'border-white/30 hover:border-white text-white hover:bg-white hover:text-primary focus-visible:outline-white'
+                }`}
+                type="button"
+                onClick={onInquireClick}
+              >
+                INQUIRE
+              </button>
+            ) : (
+              <Link
+                href="/?inquire=true"
+                className={`inline-block border bg-transparent font-label-caps text-[11px] tracking-[0.15em] py-2.5 px-7 rounded-sm transition-all duration-300 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
+                  forceScrolled
+                    ? 'border-primary/20 hover:border-primary text-primary hover:bg-primary hover:text-white focus-visible:outline-primary'
+                    : 'border-white/30 hover:border-white text-white hover:bg-white hover:text-primary focus-visible:outline-white'
+                }`}
+              >
+                INQUIRE
+              </Link>
+            )}
           </div>
 
           {/* Mobile Hamburger Button (CSS Animated HTML Spans with Perfect Symmetry) */}
           <button
             className={`block md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer w-10 h-10 relative z-50 flex items-center justify-center ${
-              (isMenuOpen || !isScrolled) ? 'focus-visible:outline-white' : 'focus-visible:outline-primary'
+              (isMenuOpen || !forceScrolled) ? 'focus-visible:outline-white' : 'focus-visible:outline-primary'
             }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
@@ -150,7 +204,7 @@ const Header: React.FC = () => {
             type="button"
           >
             <div className={`relative w-6 h-6 transition-colors duration-300 ${
-              (isMenuOpen || !isScrolled) ? 'text-white' : 'text-primary'
+              (isMenuOpen || !forceScrolled) ? 'text-white' : 'text-primary'
             }`}>
               <span
                 className={`absolute left-0 w-full h-[2px] bg-current rounded-full transition-all duration-300 transform origin-center ${
@@ -184,7 +238,10 @@ const Header: React.FC = () => {
 
         <div className="flex flex-col items-center space-y-8 my-auto">
           <button
-            onClick={() => handleLinkClick('about')}
+            onClick={() => {
+              setIsMenuOpen(false);
+              router.push('/about');
+            }}
             className={`font-headline-md md:text-headline-md text-[24px] text-white hover:text-tertiary-fixed transition-all duration-500 transform cursor-pointer uppercase ${
               isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}
@@ -201,7 +258,14 @@ const Header: React.FC = () => {
           />
 
           <button
-            onClick={() => handleLinkClick('portfolio')}
+            onClick={() => {
+              setIsMenuOpen(false);
+              if (isHome) {
+                handleLinkClick('portfolio');
+              } else {
+                router.push('/#portfolio');
+              }
+            }}
             className={`font-headline-md md:text-headline-md text-[24px] text-white hover:text-tertiary-fixed transition-all duration-500 transform cursor-pointer uppercase ${
               isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}
@@ -218,7 +282,14 @@ const Header: React.FC = () => {
           />
 
           <button
-            onClick={() => handleLinkClick('contact')}
+            onClick={() => {
+              setIsMenuOpen(false);
+              if (isHome) {
+                handleLinkClick('contact');
+              } else {
+                router.push('/#contact');
+              }
+            }}
             className={`font-headline-md md:text-headline-md text-[24px] text-white hover:text-tertiary-fixed transition-all duration-500 transform cursor-pointer uppercase ${
               isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
             }`}
@@ -234,7 +305,18 @@ const Header: React.FC = () => {
             }`}
             style={{ transitionDelay: '450ms' }}
             type="button"
-            onClick={() => handleLinkClick('contact')}
+            onClick={() => {
+              setIsMenuOpen(false);
+              if (isHome) {
+                if (onInquireClick) {
+                  onInquireClick();
+                } else {
+                  handleLinkClick('contact');
+                }
+              } else {
+                router.push('/?inquire=true');
+              }
+            }}
           >
             INQUIRE
           </button>
@@ -248,7 +330,9 @@ const Header: React.FC = () => {
           <address className="not-italic text-white/50 font-body-md text-[13px] leading-relaxed">
             Buford • Atlanta • Destination
             <br />
-            hello@floristssy.com
+            <a href={`tel:${contactPhoneRaw}`} className="hover:text-white transition-colors">{contactPhone}</a>
+            <br />
+            <a href={`mailto:${contactEmail}`} className="hover:text-white transition-colors">{contactEmail}</a>
           </address>
           
           <a

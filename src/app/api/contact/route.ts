@@ -2,11 +2,21 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const { 
+      firstName, 
+      lastName, 
+      email, 
+      phone, 
+      weddingDate, 
+      venue, 
+      budget, 
+      guestCount, 
+      message 
+    } = await request.json();
 
-    if (!name || !email || !message) {
+    if (!firstName || !lastName || !email || !phone || !weddingDate || !venue || !budget || !guestCount) {
       return NextResponse.json(
-        { error: 'Name, email, and message are required.' },
+        { error: 'All fields except message are required.' },
         { status: 400 }
       );
     }
@@ -23,6 +33,8 @@ export async function POST(request: Request) {
       );
     }
 
+    const fullName = `${firstName} ${lastName}`;
+
     const response = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
@@ -32,45 +44,65 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         sender: {
-          name: 'Florist SSY Website Inquiry',
+          name: 'Florist SSY Inquiry System',
           email: senderEmail || 'hello@floristssy.com',
         },
         to: [
           {
-            email: adminEmail || 'hello@floristssy.com',
+            email: adminEmail || 'floristssy@gmail.com',
             name: 'Soyoun Kim',
           },
         ],
         replyTo: {
           email: email,
-          name: name,
+          name: fullName,
         },
-        subject: `New contact form inquiry from ${name}`,
+        subject: `New Florist SSY Wedding Inquiry from ${fullName}`,
         htmlContent: `
           <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #f0f0f0; border-radius: 8px;">
-              <h2 style="color: #6d4c41; border-bottom: 2px solid #6d4c41; padding-bottom: 10px; margin-top: 0;">New Inquiry Received</h2>
-              <p>You have received a new message via the contact form on your website.</p>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #1b1c19; max-width: 600px; margin: 0 auto; padding: 25px; border: 1px solid #e4e2dd; border-radius: 8px; background-color: #fbf9f4;">
+              <h2 style="color: #061b0e; border-bottom: 2px solid #061b0e; padding-bottom: 12px; margin-top: 0; font-family: Georgia, serif;">New Wedding Inquiry Received</h2>
+              <p style="font-size: 14px; color: #434843;">You have received a new consultation request via the inquiry form on your website.</p>
               
-              <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold; width: 100px;">Sender Name:</td>
-                  <td style="padding: 8px 0;">${name}</td>
+              <table style="width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px;">
+                <tr style="border-bottom: 1px solid #e4e2dd;">
+                  <td style="padding: 10px 0; font-weight: bold; width: 180px; color: #061b0e;">Client Name</td>
+                  <td style="padding: 10px 0; color: #1b1c19;">${fullName}</td>
                 </tr>
-                <tr>
-                  <td style="padding: 8px 0; font-weight: bold;">Sender Email:</td>
-                  <td style="padding: 8px 0;"><a href="mailto:${email}">${email}</a></td>
+                <tr style="border-bottom: 1px solid #e4e2dd;">
+                  <td style="padding: 10px 0; font-weight: bold; color: #061b0e;">Email Address</td>
+                  <td style="padding: 10px 0; color: #1b1c19;"><a href="mailto:${email}" style="color: #4d6453; text-decoration: underline;">${email}</a></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e4e2dd;">
+                  <td style="padding: 10px 0; font-weight: bold; color: #061b0e;">Phone Number</td>
+                  <td style="padding: 10px 0; color: #1b1c19;"><a href="tel:${phone}" style="color: #4d6453; text-decoration: underline;">${phone}</a></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e4e2dd;">
+                  <td style="padding: 10px 0; font-weight: bold; color: #061b0e;">Wedding Date</td>
+                  <td style="padding: 10px 0; color: #1b1c19;">${weddingDate}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e4e2dd;">
+                  <td style="padding: 10px 0; font-weight: bold; color: #061b0e;">Venue / Location</td>
+                  <td style="padding: 10px 0; color: #1b1c19;">${venue}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e4e2dd;">
+                  <td style="padding: 10px 0; font-weight: bold; color: #061b0e;">Floral Budget</td>
+                  <td style="padding: 10px 0; color: #1b1c19;">${budget}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e4e2dd;">
+                  <td style="padding: 10px 0; font-weight: bold; color: #061b0e;">Expected Guest Count</td>
+                  <td style="padding: 10px 0; color: #1b1c19;">${guestCount}</td>
                 </tr>
               </table>
               
-              <div style="margin-top: 20px; padding: 15px; border-left: 4px solid #6d4c41; background: #fdfdfd;">
-                <p style="font-weight: bold; margin-top: 0; color: #6d4c41;">Message Content:</p>
-                <p style="white-space: pre-wrap; margin-bottom: 0;">${message}</p>
+              <div style="margin-top: 25px; padding: 18px; border-left: 4px solid #4d6453; background: #ffffff; border-radius: 4px;">
+                <p style="font-weight: bold; margin-top: 0; color: #061b0e; font-size: 14px;">Additional Details & Share:</p>
+                <p style="white-space: pre-wrap; margin-bottom: 0; font-size: 13px; color: #434843;">${message || 'No additional details provided.'}</p>
               </div>
               
-              <hr style="border: 0; border-top: 1px solid #eee; margin-top: 30px;" />
-              <p style="font-size: 12px; color: #888; text-align: center; margin-bottom: 0;">
-                You can reply directly to this email to get in touch with <strong>${name}</strong>.
+              <hr style="border: 0; border-top: 1px solid #e4e2dd; margin-top: 35px;" />
+              <p style="font-size: 11px; color: #737973; text-align: center; margin-bottom: 0;">
+                You can reply directly to this email notification to get in touch with <strong>${fullName}</strong>.
               </p>
             </body>
           </html>

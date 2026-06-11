@@ -1,6 +1,12 @@
 import React from 'react';
 
 const StructuredData: React.FC = () => {
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'floristssy@gmail.com';
+  const contactPhoneRaw = process.env.NEXT_PUBLIC_CONTACT_PHONE || '9179928888';
+  
+  // E.164 형식 전화번호 포맷 (+19179928888)
+  const telE164 = contactPhoneRaw.startsWith('+') ? contactPhoneRaw : `+1${contactPhoneRaw}`;
+
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Florist',
@@ -20,9 +26,27 @@ const StructuredData: React.FC = () => {
       'latitude': '34.1207',
       'longitude': '-84.0044',
     },
-    'email': 'hello@floristssy.com',
+    'email': contactEmail,
+    'telephone': telE164,
     'url': 'https://floristssy.com',
     'priceRange': '$$$$',
+    'sameAs': [
+      'https://www.instagram.com/florist_ssy/',
+    ],
+    'areaServed': [
+      {
+        '@type': 'AdministrativeArea',
+        'name': 'Buford',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        'name': 'Atlanta',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        'name': 'Georgia',
+      },
+    ],
     'openingHoursSpecification': [
       {
         '@type': 'OpeningHoursSpecification',
