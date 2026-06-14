@@ -114,7 +114,7 @@ const Header: React.FC<HeaderProps> = ({ onInquireClick }) => {
           <div 
             onClick={handleLogoClick}
             className={`font-headline-md text-[20px] md:text-headline-md transition-all duration-300 whitespace-nowrap cursor-pointer hover:opacity-75 ${
-              (isMenuOpen || !forceScrolled) ? 'text-white' : 'text-primary dark:text-primary-fixed'
+              (isMenuOpen || !forceScrolled) ? 'text-white md:text-primary md:dark:text-primary-fixed' : 'text-primary dark:text-primary-fixed'
             }`}
           >
             Florist SSY
@@ -126,41 +126,41 @@ const Header: React.FC<HeaderProps> = ({ onInquireClick }) => {
               className={`relative pb-1 transition-colors duration-300 cursor-pointer active:opacity-70 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
                 forceScrolled 
                   ? 'text-on-surface-variant hover:text-primary focus-visible:outline-primary' 
-                  : 'text-white/80 hover:text-white focus-visible:outline-white'
+                  : 'text-white/80 hover:text-white md:text-on-surface-variant md:hover:text-primary focus-visible:outline-white md:focus-visible:outline-primary'
               }`}
               href="/about"
             >
               ABOUT US
               <span className={`absolute bottom-0 left-0 w-full h-[1px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${
-                forceScrolled ? 'bg-primary' : 'bg-white'
+                forceScrolled ? 'bg-primary' : 'bg-white md:bg-primary'
               }`} />
             </Link>
             <Link
               className={`relative pb-1 transition-colors duration-300 cursor-pointer active:opacity-70 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
                 forceScrolled 
                   ? 'text-on-surface-variant hover:text-primary focus-visible:outline-primary' 
-                  : 'text-white/80 hover:text-white focus-visible:outline-white'
+                  : 'text-white/80 hover:text-white md:text-on-surface-variant md:hover:text-primary focus-visible:outline-white md:focus-visible:outline-primary'
               }`}
               href={isHome ? "#portfolio" : "/#portfolio"}
               onClick={(e) => handleNavClick(e, 'portfolio')}
             >
               PORTFOLIO
               <span className={`absolute bottom-0 left-0 w-full h-[1px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${
-                forceScrolled ? 'bg-primary' : 'bg-white'
+                forceScrolled ? 'bg-primary' : 'bg-white md:bg-primary'
               }`} />
             </Link>
             <Link
               className={`relative pb-1 transition-colors duration-300 cursor-pointer active:opacity-70 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
                 forceScrolled 
                   ? 'text-on-surface-variant hover:text-primary focus-visible:outline-primary' 
-                  : 'text-white/80 hover:text-white focus-visible:outline-white'
+                  : 'text-white/80 hover:text-white md:text-on-surface-variant md:hover:text-primary focus-visible:outline-white md:focus-visible:outline-primary'
               }`}
               href={isHome ? "#contact" : "/#contact"}
               onClick={(e) => handleNavClick(e, 'contact')}
             >
               CONTACT US
               <span className={`absolute bottom-0 left-0 w-full h-[1px] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ${
-                forceScrolled ? 'bg-primary' : 'bg-white'
+                forceScrolled ? 'bg-primary' : 'bg-white md:bg-primary'
               }`} />
             </Link>
           </div>
@@ -172,7 +172,7 @@ const Header: React.FC<HeaderProps> = ({ onInquireClick }) => {
                 className={`border bg-transparent font-label-caps text-[11px] tracking-[0.15em] py-2.5 px-7 rounded-sm transition-all duration-300 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 ${
                   forceScrolled
                     ? 'border-primary/20 hover:border-primary text-primary hover:bg-primary hover:text-white focus-visible:outline-primary'
-                    : 'border-white/30 hover:border-white text-white hover:bg-white hover:text-primary focus-visible:outline-white'
+                    : 'border-white/30 hover:border-white text-white hover:bg-white hover:text-primary md:border-primary/20 md:hover:border-primary md:text-primary md:hover:bg-primary md:hover:text-white focus-visible:outline-white md:focus-visible:outline-primary'
                 }`}
                 type="button"
                 onClick={onInquireClick}
