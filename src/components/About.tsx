@@ -5,6 +5,7 @@ const About: React.FC = () => {
   return (
     <section className="py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto" id="about">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+        {/* 이미지 임시 주석 처리
         <div className="md:col-span-5 md:col-start-2 relative">
           <div className="absolute -inset-4 bg-surface-container rounded-lg -z-10 opacity-50" />
           <div className="relative w-full aspect-[4/5] overflow-hidden rounded border border-outline-variant/20 group">
@@ -18,7 +19,8 @@ const About: React.FC = () => {
             />
           </div>
         </div>
-        <div className="md:col-span-5 md:col-start-8 flex flex-col justify-center space-y-6 mt-12 md:mt-0">
+        */}
+        <div className="md:col-span-8 md:col-start-3 flex flex-col justify-center space-y-6 mt-12 md:mt-0">
           <span className="font-label-caps text-label-caps text-tertiary tracking-widest uppercase">
             Meet the Florist
           </span>
