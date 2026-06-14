@@ -21,9 +21,38 @@ export async function POST(request: Request) {
       );
     }
 
+    // 이메일 형식 서버사이드 검증
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Invalid email address format.' },
+        { status: 400 }
+      );
+    }
+
+    // 전화번호 길이 서버사이드 검증
+    const cleanedPhone = phone.replace(/\D/g, '');
+    if (cleanedPhone.length < 10) {
+      return NextResponse.json(
+        { error: 'Invalid phone number. Must be at least 10 digits.' },
+        { status: 400 }
+      );
+    }
+
     const apiKey = process.env.BREVO_API_KEY;
-    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminEmailRaw = process.env.ADMIN_EMAIL || 'floristssy@gmail.com';
     const senderEmail = process.env.SENDER_EMAIL;
+
+    // 쉼표(,) 혹은 세미콜론(;)으로 구분된 이메일 주소 리스트 파싱
+    const recipientEmails = adminEmailRaw
+      .split(/[,;]/)
+      .map(emailStr => emailStr.trim())
+      .filter(emailStr => emailStr.length > 0);
+
+    const toRecipients = recipientEmails.map(emailStr => ({
+      email: emailStr,
+      name: 'Soyoun Kim',
+    }));
 
     if (!apiKey || apiKey === 'your_brevo_api_key_here') {
       console.error('Brevo API key is not configured.');
@@ -47,12 +76,7 @@ export async function POST(request: Request) {
           name: 'Florist SSY Inquiry System',
           email: senderEmail || 'hello@floristssy.com',
         },
-        to: [
-          {
-            email: adminEmail || 'floristssy@gmail.com',
-            name: 'Soyoun Kim',
-          },
-        ],
+        to: toRecipients,
         replyTo: {
           email: email,
           name: fullName,

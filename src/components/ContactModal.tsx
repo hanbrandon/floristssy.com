@@ -25,6 +25,21 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
   // Wedding Date 필드의 포커스 여부 관리 (라벨 겹침 방지 및 type="date" 동적 활성화 목적)
   const [isDateFocused, setIsDateFocused] = useState(false);
 
+  // 전화번호 자동 포맷팅 헬퍼 함수
+  const formatPhoneInput = (value: string) => {
+    const cleaned = ('' + value).replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+    if (!match) return value;
+    const [, p1, p2, p3] = match;
+    if (cleaned.length <= 3) return p1;
+    if (cleaned.length <= 6) return `(${p1}) ${p2}`;
+    return `(${p1}) ${p2}-${p3}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhone(formatPhoneInput(e.target.value));
+  };
+
   // ESC 키로 모달 닫기
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -54,6 +69,38 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMsg('');
+
+    // 필수 필드 값 비어있는지 2차 검증
+    if (
+      !firstName.trim() || 
+      !lastName.trim() || 
+      !email.trim() || 
+      !phone.trim() || 
+      !weddingDate || 
+      !venue.trim() || 
+      !budget || 
+      !guestCount
+    ) {
+      setErrorMsg('All fields marked with an asterisk (*) are required.');
+      setIsLoading(false);
+      return;
+    }
+
+    // 이메일 정규식 유효성 검증
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setErrorMsg('Please enter a valid email address.');
+      setIsLoading(false);
+      return;
+    }
+
+    // 전화번호 최소 자리수(10자리) 유효성 검증
+    const cleanedPhone = phone.replace(/\D/g, '');
+    if (cleanedPhone.length < 10) {
+      setErrorMsg('Please enter a valid 10-digit phone number.');
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch('/api/contact', {
@@ -216,7 +263,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     required
                     placeholder="Phone"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={handlePhoneChange}
                     disabled={isLoading}
                     className="peer w-full bg-transparent border-0 px-0 py-1.5 font-body-md text-primary focus:ring-0 focus-visible:outline-none placeholder-transparent"
                   />

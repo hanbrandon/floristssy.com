@@ -107,7 +107,7 @@ const Hero: React.FC<HeroProps> = ({ onInquireClick }) => {
 
         {/* Right Side: Framed Image */}
         <div className="col-span-6 flex justify-end items-center z-10">
-          <div className="bg-[#eae8e3] p-10 w-full max-w-[480px] aspect-[4/5] shadow-sm flex items-center justify-center">
+          <div className="bg-[#061b0e] p-10 w-full max-w-[480px] aspect-[4/5] shadow-sm flex items-center justify-center">
             <div className="relative w-full h-full overflow-hidden">
               <Image
                 alt={HERO_CONTENT.imageAlt}

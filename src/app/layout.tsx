@@ -3,19 +3,32 @@ import "./globals.css";
 import StructuredData from "@/components/StructuredData";
 
 export const metadata: Metadata = {
-  title: "Florist SSY - Atlanta Wedding Florist",
-  description: "Creating romantic & refined floral moments for weddings and destinations. Buford, Atlanta, Georgia. Now booking 2026/2027 weddings.",
+  title: "Florist SSY - Atlanta Wedding, Event & Destination Florist",
+  description: "Creating romantic & refined floral moments for weddings, events, and destination events. Buford, Atlanta, Georgia. Now booking 2026/2027 weddings.",
   metadataBase: new URL("https://floristssy.com"),
   alternates: {
     canonical: "https://floristssy.com",
   },
   openGraph: {
-    title: "Florist SSY - Atlanta Wedding Florist",
-    description: "Creating romantic & refined floral moments for weddings and destinations.",
+    title: "Florist SSY - Atlanta Wedding, Event & Destination Florist",
+    description: "Creating romantic & refined floral moments for weddings, events, and destination events.",
     url: "https://floristssy.com",
     siteName: "Florist SSY",
     locale: "en_US",
-    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Florist SSY - Atlanta Wedding, Event & Destination Florist",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Florist SSY - Atlanta Wedding, Event & Destination Florist",
+    description: "Creating romantic & refined floral moments for weddings, events, and destination events.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
