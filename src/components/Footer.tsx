@@ -148,7 +148,7 @@ const Footer: React.FC = () => {
               <li>
                 <span className="font-label-caps text-[10px] tracking-[0.2em] text-white/30 block mb-1.5">REGIONS</span>
                 <p className="font-body-md text-white/70 tracking-normal leading-relaxed not-italic">
-                  Buford &bull; Atlanta &bull; Destination
+                  North and South Georgia &bull; Destination Events &bull; Available for Travel
                 </p>
               </li>
               <li>
