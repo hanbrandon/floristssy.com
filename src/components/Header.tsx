@@ -328,7 +328,7 @@ const Header: React.FC<HeaderProps> = ({ onInquireClick }) => {
           }`}
         >
           <address className="not-italic text-white/50 font-body-md text-[13px] leading-relaxed">
-            Buford • Atlanta • Destination
+            North and South Georgia &bull; Destination Events &bull; Available for Travel
             <br />
             <a href={`tel:${contactPhoneRaw}`} className="hover:text-white transition-colors">{contactPhone}</a>
             <br />

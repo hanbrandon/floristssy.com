@@ -154,7 +154,7 @@ const Footer: React.FC = () => {
               <li>
                 <span className="font-label-caps text-[10px] tracking-[0.2em] text-white/30 block mb-1.5">LEGAL</span>
                 <Link 
-                  href="#privacy" 
+                  href="/privacy" 
                   className="font-label-caps text-[11px] tracking-[0.15em] text-white/70 hover:text-white transition-colors hover:underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                 >
                   PRIVACY POLICY
