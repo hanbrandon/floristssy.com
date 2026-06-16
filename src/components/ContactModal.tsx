@@ -333,7 +333,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                     style={{ backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23061b0e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>")`, backgroundPosition: 'right 0 center', backgroundRepeat: 'no-repeat', backgroundSize: '16px' }}
                   >
                     <option value="" disabled hidden></option>
-                    <option value="Under $5,000">Under $5,000</option>
+                    <option value="Under $3,000">Under $3,000</option>
+                    <option value="$3,000 - $5,000">$3,000 - $5,000</option>
                     <option value="$5,000 - $7,500">$5,000 - $7,500</option>
                     <option value="$7,500 - $10,000">$7,500 - $10,000</option>
                     <option value="$10,000 - $15,000">$10,000 - $15,000</option>
