@@ -46,7 +46,6 @@ const portfolioItems: PortfolioItem[] = [
   { id: 35, src: "/portfolio/portfolio_35.png", alt: "Bespoke floral design work 35 at floristssy.com." },
   { id: 36, src: "/portfolio/portfolio_36.jpg", alt: "Bespoke floral design work 36 at floristssy.com." },
   { id: 37, src: "/portfolio/portfolio_37.jpg", alt: "Bespoke floral design work 37 at floristssy.com." },
-  { id: 38, src: "/portfolio/portfolio_38.jpg", alt: "Bespoke floral design work 38 at floristssy.com." },
   { id: 39, src: "/portfolio/portfolio_39.jpg", alt: "Bespoke floral design work 39 at floristssy.com.", type: 'image' },
   { id: 40, src: "/portfolio/portfolio_40.jpg", alt: "Bespoke floral design work 40 at floristssy.com.", type: 'image' },
   { id: 41, src: "/portfolio/portfolio_41.jpg", alt: "Bespoke floral design work 41 at floristssy.com.", type: 'image' },
